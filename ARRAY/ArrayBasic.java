@@ -1,4 +1,4 @@
-import java.util.*;
+package DSA_Using_java.ARRAY;
 
 public class ArrayBasic {
     // for updating value of array
