@@ -1,5 +1,7 @@
-public class pr {
-    // Node class
+import java.util.LinkedList;
+import java.util.Queue;
+
+class pr {
     static class Node {
         int data;
         Node left;
@@ -12,32 +14,21 @@ public class pr {
         }
     }
 
-    // class BinaryTree
     static class BinaryTree {
         static int idx = -1;
 
-        public static Node buildTree(int node[]) {
+        public static Node buildtree(int node[]) {
             idx++;
             if (node[idx] == -1) {
                 return null;
             }
             Node newNode = new Node(node[idx]);
-            newNode.left = buildTree(node);
-            newNode.right = buildTree(node);
+            newNode.left = buildtree(node);
+            newNode.right = buildtree(node);
             return newNode;
         }
 
-        // inOrder Traverse
-        public static void inOrder(Node root) {
-            if (root == null) {
-                return;
-            }
-            inOrder(root.left);
-            System.out.print(root.data + " ");
-            inOrder(root.right);
-        }
-
-        // preOrder
+        // preorder
         public static void preOrder(Node root) {
             if (root == null) {
                 return;
@@ -47,22 +38,43 @@ public class pr {
             preOrder(root.right);
         }
 
-        // postOrder
-        public static void postOrder(Node root) {
+        // levelOrder
+        public static void levelOrder(Node root) {
             if (root == null) {
                 return;
             }
-            postOrder(root.left);
-            postOrder(root.right);
-            System.out.print(root.data + " ");
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            q.add(null);
+            // check queue is null
+            while (!q.isEmpty()) {
+                Node curr = q.remove();
+                if (curr == null) {
+                    System.out.println();
+                    if (q.isEmpty()) {
+                        break;
+                    } else {
+                        q.add(null);
+                    }
+                } else {
+                    System.out.print(curr.data + " ");
+                    if (curr.left != null) {
+                        q.add(curr.left);
+                    }
+                    if (curr.right != null) {
+                        q.add(curr.right);
+                    }
+                }
+            }
         }
+
     }
 
     public static void main(String[] args) {
         int[] node = { 1, 2, 4, -1, -1, 5, -1, -1, 3, 6, -1, -1, -1 };
         BinaryTree tree = new BinaryTree();
-        Node root = tree.buildTree(node);
-        tree.postOrder(root);
+        Node root = tree.buildtree(node);
+        tree.levelOrder(root);
 
     }
 }
