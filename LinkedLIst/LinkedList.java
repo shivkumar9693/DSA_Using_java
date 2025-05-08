@@ -58,6 +58,55 @@ public class LinkedList {
         size++;
     }
 
+    // remove first
+    public static int removeFirst() {
+        if (size == 0) {
+            System.out.println("Empty list");
+            return 0;
+        }
+        int val = head.data;
+        head = head.next;
+        size--;
+        return val;
+    }
+
+    // remove last
+    public static void removeLast() {
+        if (size == 0) {
+            System.out.println("empty list");
+            return;
+        }
+        if (size == 1) {
+            head = tail = null;
+            return;
+        }
+        Node temp = head;
+        for (int i = 0; i < size - 2; i++) {
+            temp = temp.next;
+        }
+        temp.next = null;
+        tail = temp;
+        size--;
+    }
+
+    // remove from middle
+    public static Node removeMiddle() {
+        if (size == 0) {
+            System.out.println("empty list");
+            return null;
+        }
+        Node slow = head;
+        Node fast = head;
+        Node prev = null;
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = prev.next.next;
+        return prev;
+    }
+
     // print
     static void print() {
         if (head == null) {
@@ -77,6 +126,9 @@ public class LinkedList {
         l.addEnd(3);
         l.addEnd(5);
         l.addMiddle(6);
+        // l.removeFirst();
+        // l.removeLast();
+        removeMiddle();
         l.print();
     }
 }
