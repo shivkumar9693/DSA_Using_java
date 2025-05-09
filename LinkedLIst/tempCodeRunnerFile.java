@@ -1,1 +1,1 @@
-addLast
+l.removeFromFirst(2);

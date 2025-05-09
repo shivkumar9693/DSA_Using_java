@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class LinkedList {
     public static class Node {
         int data;
@@ -107,6 +109,42 @@ public class LinkedList {
         return prev;
     }
 
+    // remove element from first
+    public static void removeFromFirst(int index) {
+        if (index == size) {
+            head = head.next;
+            return;
+        }
+        Node temp = head;
+        int i = 1;
+        while (i < index) {
+            temp = temp.next;
+            i++;
+        }
+        temp.next = temp.next.next;
+        return;
+    }
+
+    // serach element in linked list
+    public static int searchElement(int key) {
+        if (size == 0) {
+            System.out.println("Element Not Found");
+            return 0;
+        }
+        Node temp = head;
+        int i = 0;
+        while (temp != null) {
+            if (temp.data == key) {
+                System.out.print("Element found at index ");
+                return i;
+            }
+            temp = temp.next;
+            i++;
+        }
+        return 0;
+
+    }
+
     // print
     static void print() {
         if (head == null) {
@@ -121,14 +159,28 @@ public class LinkedList {
 
     public static void main(String[] args) {
         LinkedList l = new LinkedList();
+        Scanner sc = new Scanner(System.in);
+        // User Input for Linked list
+        // System.out.println("Eneter the size of linked list");
+        // int size = sc.nextInt();
+        // while (size > 0) {
+        // l.addEnd(sc.nextInt());
+        // size--;
+        // }
+        // __________________________________________________
         l.addFrist(1);
         l.addFrist(2);
         l.addEnd(3);
         l.addEnd(5);
         l.addMiddle(6);
+        // _______________________________________
+        // l.removeFromFirst(2);
         // l.removeFirst();
         // l.removeLast();
-        removeMiddle();
+        // removeMiddle();
+        // _______________________________________
         l.print();
+        // System.out.println(l.searchElement(5));
+
     }
 }
